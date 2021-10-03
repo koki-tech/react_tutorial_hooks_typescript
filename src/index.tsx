@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Repeat } from "typescript-tuple";
+// import { Repeat } from "typescript-tuple";
 import ReactDOM from "react-dom";
 import './index.css';
 // import { type } from "os";
@@ -19,7 +19,9 @@ const Square = (props: SquareProps) => {
   );
 };
 
-type BoardState = Repeat<SquareState, 9>;
+// type BoardState = Repeat<SquareState, 9>;
+// type BoardState = [SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState, SquareState];
+type BoardState = SquareState[];
 
 type BoardProps = {
     squares: BoardState;
@@ -57,15 +59,15 @@ const Board = (props: BoardProps) => {
   );
 };
 
-const obj: {} = {squares: BoardState};
+// const obj: {} = {squares: BoardState};
 
 // type Step = {
 //   squares: BoardState
 // };
 
 type GameState = {
-  // readonly history: {squares: BoardState}[][],
-  readonly history: obj[][];
+  readonly history: {squares: BoardState}[],
+  // readonly history: obj[][];
   // readonly history: [...Step];
   // readonly history: BoardState[];
   readonly stepNumber: number;
@@ -75,7 +77,8 @@ type GameState = {
 const Game = () => {
   // const [history, setHistory] = useState([{squares: Array(9).fill(null)}]);
   // const [history, setHistory] = useState<{squares: BoardState}[]>([{squares: Array(9).fill(null)}]);
-  const [history, setHistory] = useState<GameState['history']>([{squares: Array(9).fill(null)}]);
+  // const [history, setHistory] = useState<GameState['history']>([{squares: Array(9).fill(null)}]);
+  const [history, setHistory] = useState<GameState['history']>([{squares: [null, null, null, null, null, null, null, null, null]}]);
   const [stepNumber, setStepNumber] = useState<GameState['stepNumber']>(0);
   const [xIsNext, setXIsNext] = useState<GameState['xIsNext']>(true);
 
@@ -137,6 +140,7 @@ const Game = () => {
 ReactDOM.render(<Game />, document.getElementById("root"));
 
 const calculateWinner = (squares: BoardState): SquareState => {
+// const calculateWinner = (squares: SquareState[]): SquareState => {
 // const calculateWinner = (squares: BoardState) => {
   const lines = [
     [0, 1, 2],
